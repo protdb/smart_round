@@ -30,10 +30,10 @@ def format_value(val: float, tail=3) -> str:
     return rt
 
 
-def format_dataframe(df: pd.DataFrame) -> pd.DataFrame:
+def format_dataframe(df: pd.DataFrame, tail=3) -> pd.DataFrame:
     if pd is None:
         raise ImportError('Install pandas module with `pip install pandas`')
     for col in df.columns:
         if df[col].dtype == 'float64':
-            df[col] = df[col].apply(format_value)
+            df[col] = df[col].apply(lambda x: format_value(x, tail))
     return df
